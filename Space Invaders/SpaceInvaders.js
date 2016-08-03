@@ -13,14 +13,15 @@ var text = true;
 var shipImage;
 var pBulletImage;
 var alienImage;
-
 function setup() {
 	createCanvas(700,600);
 	background(0);
 	shipImage = loadImage("Ship.png");
 	ship = createSprite(playerX + 15, 575);
 	ship.addImage("normal", shipImage);
-	//alienImage = loadImage("alien");
+	alienImage = loadImage("alien.png");
+	//alien = createSprite();
+	//alien.addImage("normal", alienImage);
 
 }
 
@@ -60,8 +61,9 @@ function draw() {
 			
 			if (aliens[i][j] == 1) {
 				ellipse(alienX + i * 50, alienY + j * 60, 30,30);
-				//alien = createSprite(alienX + i * 50, alienY + j * 60);
-				//alien.addImage("normal", alienImage);
+				//alien(alienX + i * 50, alienY + j * 60);
+				alien = createSprite(alienX + i * 50, alienY + j * 60);
+				alien.addImage("normal", alienImage);
 
 				//alien(alienX + i * 50, alienY + j * 60);
 			}
