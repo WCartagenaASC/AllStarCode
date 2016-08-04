@@ -1,5 +1,5 @@
 var aliens = [[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]];
-var alienX = 10;
+var alienX = 110;
 var alienY = 50;
 var bulletX = 50;
 var bulletY = 565;
@@ -8,16 +8,11 @@ var bulletFired = false;
 var alienSpeedX = 1;
 var alienXR = 610;
 var alienXL = alienX;
-var alienSpaceX = 60;
-var alienSpaceY = 70;
 var alienYcounter = 0 ;
 var text = true;
 var shipImage;
 var pBulletImage;
 var alienImage;
-var myScore = 0;
-var alienBulletX = 4;
-var alienBulletY = 4; 
 function setup() {
 	createCanvas(700,600);
 	background(0);
@@ -25,6 +20,7 @@ function setup() {
 	ship = createSprite(playerX + 15, 575);
 	ship.addImage("normal", shipImage);
 	alienImage = loadImage("alien.png");
+	//alien = createSprite(alienX + i * 50, alienY + j * 60);
 	//alien = createSprite();
 	//alien.addImage("normal", alienImage);
 
@@ -46,13 +42,7 @@ function intersect(bulletX, bulletY, alienX, alienY) {
 function draw() {
 	background(0);
 	rect(playerX, 565, 30, 30);
-	textSize(32);
-	fill(255);
-	text("Score", 10, 30);
-	text(myScore, 125, 30);
-
-
-	alienX = alienX + alienSpeedX; // Boundaries!!!!
+	alienX = alienX + alienSpeedX;
 	alienXL = alienXL + alienSpeedX;
 	alienXR = alienXR + alienSpeedX;
 
@@ -71,18 +61,18 @@ function draw() {
 		for (j = 1; j < aliens[i].length; j++){
 			
 			if (aliens[i][j] == 1) {
-				ellipse(alienX + (i * alienSpaceX), alienY + (j * alienSpaceY), 30,30);
-				image(alienImage, alienX - 20 + (i * alienSpaceX), alienY - 20 + (j * alienSpaceY));
+				ellipse(alienX + i * 50, alienY + j * 60, 30,30);
+				//alien(alienX + i * 50, alienY + j * 60);
+				alien = createSprite(alienX + i * 50, alienY + j * 60);
+				alien.addImage("normal", alienImage);
 
 				//alien(alienX + i * 50, alienY + j * 60);
 			}
 
-			if ( (aliens[i][j] == 1) && (intersect(bulletX, bulletY, alienX + i * alienSpaceX, alienY + j * alienSpaceY)) ){
+			if ( (aliens[i][j] == 1) && (intersect(bulletX, bulletY, alienX + i * 50, alienY + j * 60)) ){
 				aliens[i][j] = 0;
 				bulletFired = false;
 				bulletY = 565;
-				myScore = myScore + 10;
-				print(myScore);
 
 			}
 		
@@ -117,19 +107,9 @@ function draw() {
 		}
 		
 	}
-	var row = 1
-	var col = 1
-	if (aliens[row][col] == 1){
-		rect(alienBulletX, alienBulletY, 5, 10);
-		alienBulletY = alienBulletY + 5;
-
-
-	}
-	//if (alienFired == true){
-	//	rect()
-	//}
 
 
 	drawSprites();
 	}
+
 
